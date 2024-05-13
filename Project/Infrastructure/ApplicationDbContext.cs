@@ -1,7 +1,5 @@
-﻿using System.Reflection;
-using System.Reflection.Emit;
-using Microsoft.EntityFrameworkCore;
-using Project.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.Infrastructure.Entities;
 
 namespace Project.Infrastructure
 {

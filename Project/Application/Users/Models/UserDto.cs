@@ -1,4 +1,4 @@
-﻿namespace Project.Users.Models
+﻿namespace Project.Application.Users.Models
 {
     public class UserDto
     {

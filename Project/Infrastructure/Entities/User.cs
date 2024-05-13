@@ -1,4 +1,4 @@
-﻿namespace Project.Entities
+﻿namespace Project.Infrastructure.Entities
 {
     public class User
     {

@@ -1,6 +1,6 @@
 ﻿using Project.Enums;
 
-namespace Project.Entities
+namespace Project.Infrastructure.Entities
 {
     public class Offer
     {

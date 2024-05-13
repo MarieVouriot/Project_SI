@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Project.Infrastructure;
-using System.Globalization;
+using Project.Infrastructure.Entities;
 
-namespace Project.Entities
+namespace Project.Infrastructure
 {
     public static class InitData
     {
@@ -12,10 +11,10 @@ namespace Project.Entities
             {
                 context.Database.EnsureCreated();
 
-                // Look for any movies.
+                // Look for any users
                 if (context.Users.Count() > 0)
                 {
-                    return;   // DB has been seeded
+                    return; // DB has been seeded
                 }
 
                 // Ajoutez un utilisateur de test

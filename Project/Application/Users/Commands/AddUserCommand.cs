@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using Project.Entities;
 using Project.Infrastructure;
+using Project.Infrastructure.Entities;
 
-namespace Project.Users.Commands
+namespace Project.Application.Users.Commands
 {
     public sealed class AddUserCommand : IRequest<Unit>
     {
@@ -15,7 +15,7 @@ namespace Project.Users.Commands
         public sealed class AddUserCommandHandler : IRequestHandler<AddUserCommand, Unit>
         {
             private ApplicationDbContext _context;
-            public AddUserCommandHandler(ApplicationDbContext context) 
+            public AddUserCommandHandler(ApplicationDbContext context)
             {
                 _context = context;
             }

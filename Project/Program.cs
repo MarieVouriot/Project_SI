@@ -1,6 +1,5 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Project.Entities;
 using Project.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);

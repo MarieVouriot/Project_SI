@@ -1,10 +1,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Project.Users.Commands;
-using Project.Users.Models;
-using Project.Users.Queries;
+using Project.Application.Users.Commands;
+using Project.Application.Users.Models;
+using Project.Application.Users.Queries;
 
-namespace Project.Controllers
+namespace Project.Api.Controllers
 {
     public class UserController : ApiController
     {
@@ -16,7 +16,7 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        [Route("addUser")]  
+        [Route("addUser")]
         public async Task<ActionResult<Unit>> AddUser([FromBody] AddUserCommand cmd)
         {
             return await Mediator.Send(cmd);

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project.Enums;
 
-namespace Project.Entities
+namespace Project.Infrastructure.Entities
 {
     public class Reservation
     {

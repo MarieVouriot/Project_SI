@@ -1,6 +1,6 @@
 ﻿using Project.Enums;
 
-namespace Project.Entities
+namespace Project.Infrastructure.Entities
 {
     public class Housing
     {
@@ -12,7 +12,7 @@ namespace Project.Entities
 
         // Navigation properties
         public User Owner { get; set; }
-        
+
         // Reverse navigation
         public ICollection<Offer> Offers { get; set; }
     }
