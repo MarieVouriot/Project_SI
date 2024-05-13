@@ -6,29 +6,20 @@ using Project.Users.Queries;
 
 namespace Project.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public UserController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet]
         [Route("getUsers")]
         public async Task<ActionResult<List<UserDto>>> GetUsers([FromQuery] GetUsersQuery query)
         {
-            return await _mediator.Send(query);
+            return await Mediator.Send(query);
         }
 
         [HttpPost]
-        [Route("addUser")]
-        public async Task<ActionResult<Unit>> AssUser([FromBody] AddUserCommand cmd)
+        [Route("addUser")]  
+        public async Task<ActionResult<Unit>> AddUser([FromBody] AddUserCommand cmd)
         {
-            return await _mediator.Send(cmd);
+            return await Mediator.Send(cmd);
         }
     }
 }
