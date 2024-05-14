@@ -34,7 +34,6 @@ namespace Project.Application.Users.Commands
                         IsOwner = request.IsOwner,
                     };
 
-                    // TODO : add to database
                     await _context.Users.AddAsync(user, cancellationToken);
                     await _context.SaveChangesAsync();
                 }
