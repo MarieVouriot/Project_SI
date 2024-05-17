@@ -21,7 +21,7 @@ namespace Project.Application.Users.Commands
                 _context.ChangeTracker.AutoDetectChangesEnabled = false;
                 try
                 {
-                    var userToDelete = await _context.Users.Where(u => request.Id == u.Id).FirstAsync();
+                    var userToDelete = await _context.Users.Where(u => request.Id == u.Id).FirstOrDefaultAsync(cancellationToken);
                     if (userToDelete != null)
                     {
                         _context.Users.Remove(userToDelete);
