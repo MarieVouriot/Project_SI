@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using UserService.Users.Models;
 
-namespace Project.Application.Users.Queries
+namespace UserService.Users.Queries
 {
     public class GetUserQuery : IRequest<UserDto>
     {

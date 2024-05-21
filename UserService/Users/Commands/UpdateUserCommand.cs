@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Project.Application.Users.Commands
+namespace UserService.Users.Commands
 {
     public class UpdateUserCommand : IRequest<Unit>
     {
