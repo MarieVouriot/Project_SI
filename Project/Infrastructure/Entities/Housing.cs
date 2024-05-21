@@ -11,9 +11,9 @@ namespace Project.Infrastructure.Entities
         public HousingTypeEnum Type { get; set; }
 
         // Navigation properties
-        public User Owner { get; set; }
+        public User? Owner { get; set; }
 
         // Reverse navigation
-        public ICollection<Offer> Offers { get; set; }
+        public ICollection<Offer>? Offers { get; set; }
     }
 }

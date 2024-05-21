@@ -21,9 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Housings\Commands\" />
-    <Folder Include="Application\Offers\Commands\" />
-    <Folder Include="Application\Reservations\Commands\" />
     <Folder Include="Application\Services\" />
     <Folder Include="Infrastructure\Repositories\" />
   </ItemGroup>
