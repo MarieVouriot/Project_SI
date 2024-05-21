@@ -2,7 +2,7 @@
 using Infrastructure.Entities;
 using MediatR;
 
-namespace Project.Application.Users.Commands
+namespace UserService.Users.Commands
 {
     public sealed class AddUserCommand : IRequest<Unit>
     {

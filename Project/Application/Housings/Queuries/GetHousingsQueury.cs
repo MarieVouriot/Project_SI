@@ -1,8 +1,7 @@
-﻿using MediatR;
+﻿using Infrastructure;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Project.Application.Housing.Models;
-using Project.Application.Users.Models;
-using Project.Infrastructure;
 
 
 namespace Project.Application.Housing.Queries
@@ -23,11 +22,11 @@ namespace Project.Application.Housing.Queries
                     .AsNoTracking()
                     .Select(h => new HousingDTO
                     {
-                        Id = h.Id,
-                        Address = h.Address,
+                        Id          = h.Id,
+                        Address     = h.Address,
                         Description = h.Description,
-                        OwnerId = h.OwnerId,
-                        Type = h.Type
+                        OwnerId     = h.OwnerId,
+                        Type        = h.Type
                     }).ToListAsync(cancellationToken);
 
                 return housings ?? new List<HousingDTO>();

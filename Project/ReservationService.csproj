@@ -25,11 +25,14 @@
     <Folder Include="Application\Offers\Commands\" />
     <Folder Include="Application\Reservations\Commands\" />
     <Folder Include="Application\Services\" />
-    <Folder Include="Infrastructure\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

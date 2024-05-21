@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Project.Infrastructure.Entities;
+﻿using Infrastructure.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace Project.Infrastructure
+namespace Infrastructure
 {
     public class ApplicationDbContext : DbContext
     {
@@ -24,9 +24,9 @@ namespace Project.Infrastructure
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=housingdb;Integrated Security=True;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=housingdb;Integrated Security=True;");
+        //}
     }
 }

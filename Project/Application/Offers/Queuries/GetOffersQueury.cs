@@ -1,7 +1,7 @@
-﻿using MediatR;
+﻿using Infrastructure;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Project.Application.Offers.Models;
-using Project.Infrastructure;
 
 
 namespace Project.Application.Offers.Queries
@@ -22,11 +22,11 @@ namespace Project.Application.Offers.Queries
                     .AsNoTracking()
                     .Select(o => new OfferDTO
                     {
-                        Id = o.Id,
-                        HouseId = o.HouseId,
-                        Status = o.Status,
-                        StartDate = o.StartDate,
-                        EndDate = o.EndDate,
+                        Id          = o.Id,
+                        HouseId     = o.HouseId,
+                        Status      = o.Status,
+                        StartDate   = o.StartDate,
+                        EndDate     = o.EndDate,
                         PricePerDay = o.PricePerDay
                     }).ToListAsync(cancellationToken);
 

@@ -1,4 +1,4 @@
-﻿namespace Project.Enums
+﻿namespace Infrastructure.Enums
 {
     public enum ReservationStatusEnum
     {

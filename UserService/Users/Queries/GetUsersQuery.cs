@@ -1,9 +1,9 @@
 ﻿using Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Project.Application.Users.Models;
+using UserService.Users.Models;
 
-namespace Project.Application.Users.Queries
+namespace UserService.Users.Queries
 {
     public class GetUsersQuery : IRequest<List<UserDto>>
     {

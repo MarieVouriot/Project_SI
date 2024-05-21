@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Project.Infrastructure.Entities;
 
-namespace Project.Infrastructure
+namespace Infrastructure.Entities
 {
     public static class InitData
     {

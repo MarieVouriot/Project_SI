@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Project.Application.Users.Commands
+namespace UserService.Users.Commands
 {
     public sealed class DeleteUserCommand : IRequest<Unit>
     {

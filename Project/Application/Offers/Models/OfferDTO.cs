@@ -1,5 +1,4 @@
-﻿using Project.Enums;
-using Project.Infrastructure.Entities;
+﻿using Infrastructure.Enums;
 
 namespace Project.Application.Offers.Models
 {

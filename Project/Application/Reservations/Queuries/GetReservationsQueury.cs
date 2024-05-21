@@ -1,8 +1,7 @@
-﻿using MediatR;
+﻿using Infrastructure;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Project.Application.Reservations.Models;
-using Project.Application.Users.Models;
-using Project.Infrastructure;
 
 
 namespace Project.Application.Reservations.Queries
@@ -24,12 +23,12 @@ namespace Project.Application.Reservations.Queries
                     .AsNoTracking()
                     .Select(r => new ReservationDTO
                     {
-                        Id = r.Id,
-                        TenantId = r.TenantId,
-                        OfferId = r.OfferId,
+                        Id        = r.Id,
+                        TenantId  = r.TenantId,
+                        OfferId   = r.OfferId,
                         StartDate = r.StartDate,
-                        EndDate = r.EndDate,
-                        Status = r.Status
+                        EndDate   = r.EndDate,
+                        Status    = r.Status
                     }).FirstOrDefaultAsync(cancellationToken);
 
                 return reservation ?? new ReservationDTO();
