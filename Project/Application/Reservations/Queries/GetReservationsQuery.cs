@@ -6,9 +6,9 @@ using Project.Application.Reservations.Models;
 
 namespace Project.Application.Reservations.Queries
 {
-    public class GetReservationsQueury : IRequest<ReservationDTO>
+    public class GetReservationsQuery : IRequest<ReservationDTO>
     {
-        public sealed class GetReservationsQueuryHandler : IRequestHandler<GetReservationsQueury, ReservationDTO>
+        public sealed class GetReservationsQueuryHandler : IRequestHandler<GetReservationsQuery, ReservationDTO>
         {
             private ApplicationDbContext _context;
 
@@ -17,7 +17,7 @@ namespace Project.Application.Reservations.Queries
                 _context = context;
             }
 
-            public async Task<ReservationDTO> Handle(GetReservationsQueury request, CancellationToken cancellationToken)
+            public async Task<ReservationDTO> Handle(GetReservationsQuery request, CancellationToken cancellationToken)
             {
                 var reservation = await _context.Reservations
                     .AsNoTracking()

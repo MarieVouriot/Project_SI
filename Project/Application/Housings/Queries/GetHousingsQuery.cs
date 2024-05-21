@@ -6,9 +6,9 @@ using Project.Application.Housing.Models;
 
 namespace Project.Application.Housing.Queries
 {
-    public class GetHousingsQueury : IRequest<List<HousingDTO>>
+    public class GetHousingsQuery : IRequest<List<HousingDTO>>
     {
-        public sealed class GetHousingsQueuryHandler : IRequestHandler<GetHousingsQueury, List<HousingDTO>>
+        public sealed class GetHousingsQueuryHandler : IRequestHandler<GetHousingsQuery, List<HousingDTO>>
         {
             private ApplicationDbContext _context;
             public GetHousingsQueuryHandler(ApplicationDbContext context)
@@ -16,7 +16,7 @@ namespace Project.Application.Housing.Queries
                 _context = context;
             }
 
-            public async Task<List<HousingDTO>> Handle(GetHousingsQueury request, CancellationToken cancellationToken)
+            public async Task<List<HousingDTO>> Handle(GetHousingsQuery request, CancellationToken cancellationToken)
             {
                 var housings = await _context.Housings
                     .AsNoTracking()
