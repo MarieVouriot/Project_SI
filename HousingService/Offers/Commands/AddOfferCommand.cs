@@ -3,7 +3,7 @@ using Infrastructure.Entities;
 using Infrastructure.Enums;
 using MediatR;
 
-namespace ReservationService.Offers.Commands
+namespace HousingService.Offers.Commands
 {
     public class AddOfferCommand : IRequest<Unit>
     {

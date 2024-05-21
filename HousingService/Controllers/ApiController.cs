@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ReservationService.Api.Controllers
+namespace HousingService.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

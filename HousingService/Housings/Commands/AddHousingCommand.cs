@@ -4,7 +4,7 @@ using Infrastructure.Enums;
 using MediatR;
 
 
-namespace ReservationService.Housings.Commands
+namespace HousingService.Housings.Commands
 {
     public sealed class AddHousingCommand : IRequest<Unit>
     {

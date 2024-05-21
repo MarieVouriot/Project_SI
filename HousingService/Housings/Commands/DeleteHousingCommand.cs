@@ -1,7 +1,7 @@
 ﻿using Infrastructure;
 using MediatR;
 
-namespace ReservationService.Housings.Commands
+namespace HousingService.Housings.Commands
 {
     public class DeleteHousingCommand : IRequest<Unit>
     {

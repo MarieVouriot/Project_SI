@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ReservationService.Housings.Commands;
-using ReservationService.Housings.Models;
-using ReservationService.Housings.Queries;
+using HousingService.Housings.Commands;
+using HousingService.Housings.Models;
+using HousingService.Housings.Queries;
 
-namespace ReservationService.Api.Controllers
+namespace HousingService.Api.Controllers
 {
     public class HousingController : ApiController
     {
