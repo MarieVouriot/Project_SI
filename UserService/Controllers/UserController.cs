@@ -15,6 +15,13 @@ namespace UserService.Api.Controllers
             return await Mediator.Send(query);
         }
 
+        [HttpGet]
+        [Route("getUser")]
+        public async Task<ActionResult<UserDto>> GetUser([FromQuery] GetUserQuery query)
+        {
+            return await Mediator.Send(query);
+        }
+
         [HttpPost]
         [Route("addUser")]
         public async Task<ActionResult<Unit>> AddUser([FromBody] AddUserCommand cmd)
@@ -25,6 +32,13 @@ namespace UserService.Api.Controllers
         [HttpPost]
         [Route("deleteUser")]
         public async Task<ActionResult<Unit>> deleteUser([FromBody] DeleteUserCommand cmd)
+        {
+            return await Mediator.Send(cmd);
+        }
+
+        [HttpPost]
+        [Route("updateUser")]
+        public async Task<ActionResult<Unit>> UpdateUser([FromBody] UpdateUserCommand cmd)
         {
             return await Mediator.Send(cmd);
         }
