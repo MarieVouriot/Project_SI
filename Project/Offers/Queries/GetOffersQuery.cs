@@ -1,10 +1,10 @@
 ﻿using Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Project.Application.Offers.Models;
+using ReservationService.Offers.Models;
 
 
-namespace Project.Application.Offers.Queries
+namespace ReservationService.Offers.Queries
 {
     public class GetOffersQuery : IRequest<List<OfferDTO>>
     {

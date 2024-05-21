@@ -1,10 +1,10 @@
 ﻿using Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Project.Application.Housing.Models;
+using ReservationService.Housings.Models;
 
 
-namespace Project.Application.Housing.Queries
+namespace ReservationService.Housings.Queries
 {
     public class GetHousingsQuery : IRequest<List<HousingDTO>>
     {
@@ -22,16 +22,16 @@ namespace Project.Application.Housing.Queries
                     .AsNoTracking()
                     .Select(h => new HousingDTO
                     {
-                        Id          = h.Id,
-                        Address     = h.Address,
+                        Id = h.Id,
+                        Address = h.Address,
                         Description = h.Description,
-                        OwnerId     = h.OwnerId,
-                        Type        = h.Type
+                        OwnerId = h.OwnerId,
+                        Type = h.Type
                     }).ToListAsync(cancellationToken);
 
                 return housings ?? new List<HousingDTO>();
             }
-            
+
         }
     }
 }

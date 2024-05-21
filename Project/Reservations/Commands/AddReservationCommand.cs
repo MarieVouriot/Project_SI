@@ -1,12 +1,9 @@
-﻿using MediatR;
-using Project.Enums;
-using Project.Infrastructure;
-using Project.Infrastructure.Entities;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Infrastructure;
+using Infrastructure.Entities;
+using Infrastructure.Enums;
+using MediatR;
 
-namespace Project.Application.Reservations.Commands
+namespace ReservationService.Reservations.Commands
 {
     public class AddReservationCommand : IRequest<Unit>
     {

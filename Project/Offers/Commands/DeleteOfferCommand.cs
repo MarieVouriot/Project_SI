@@ -1,9 +1,7 @@
-﻿using MediatR;
-using Project.Infrastructure;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Infrastructure;
+using MediatR;
 
-namespace Project.Application.Offers.Commands
+namespace ReservationService.Offers.Commands
 {
     public class DeleteOfferCommand : IRequest<Unit>
     {

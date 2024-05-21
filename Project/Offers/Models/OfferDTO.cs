@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Enums;
 
-namespace Project.Application.Offers.Models
+namespace ReservationService.Offers.Models
 {
     public class OfferDTO
     {

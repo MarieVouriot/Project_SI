@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Enums;
 
-namespace Project.Application.Housing.Models
+namespace ReservationService.Housings.Models
 {
     public class HousingDTO
     {

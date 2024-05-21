@@ -1,10 +1,10 @@
-﻿using MediatR;
-using Project.Enums;
-using Project.Infrastructure;
-using Project.Infrastructure.Entities;
+﻿using Infrastructure;
+using Infrastructure.Entities;
+using Infrastructure.Enums;
+using MediatR;
 
 
-namespace Project.Application.Housings.Commands
+namespace ReservationService.Housings.Commands
 {
     public sealed class AddHousingCommand : IRequest<Unit>
     {
@@ -27,7 +27,7 @@ namespace Project.Application.Housings.Commands
                 _context.ChangeTracker.AutoDetectChangesEnabled = false;
                 try
                 {
-                    var housing = new Infrastructure.Entities.Housing
+                    var housing = new Housing
                     {
                         Address = request.Address,
                         Description = request.Description,

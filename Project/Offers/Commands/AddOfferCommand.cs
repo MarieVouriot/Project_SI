@@ -1,9 +1,9 @@
-﻿using MediatR;
-using Project.Enums;
-using Project.Infrastructure;
-using Project.Infrastructure.Entities;
+﻿using Infrastructure;
+using Infrastructure.Entities;
+using Infrastructure.Enums;
+using MediatR;
 
-namespace Project.Application.Offers.Commands
+namespace ReservationService.Offers.Commands
 {
     public class AddOfferCommand : IRequest<Unit>
     {

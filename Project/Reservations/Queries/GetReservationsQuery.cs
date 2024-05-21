@@ -1,10 +1,10 @@
 ﻿using Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Project.Application.Reservations.Models;
+using ReservationService.Reservations.Models;
 
 
-namespace Project.Application.Reservations.Queries
+namespace ReservationService.Reservations.Queries
 {
     public class GetReservationsQuery : IRequest<ReservationDTO>
     {
