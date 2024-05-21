@@ -4,6 +4,6 @@
     {
         NotForRent = 1,
         Available  = 2,
-        Occuped    = 23,
+        Occuped    = 3,
     }
 }

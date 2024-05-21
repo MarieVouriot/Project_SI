@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Project.Infrastructure;
 using Project.Enums;
+using Project.Infrastructure;
 using Project.Infrastructure.Entities;
 
 
@@ -8,7 +8,6 @@ namespace Project.Application.Housings.Commands
 {
     public sealed class AddHousingCommand : IRequest<Unit>
     {
-        public int Id { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
         public int OwnerId { get; set; }

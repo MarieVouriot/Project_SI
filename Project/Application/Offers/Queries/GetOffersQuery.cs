@@ -6,9 +6,9 @@ using Project.Infrastructure;
 
 namespace Project.Application.Offers.Queries
 {
-    public class GetOffersQueury : IRequest<List<OfferDTO>>
+    public class GetOffersQuery : IRequest<List<OfferDTO>>
     {
-        public sealed class GetOffersQueuryHandler : IRequestHandler<GetOffersQueury, List<OfferDTO>>
+        public sealed class GetOffersQueuryHandler : IRequestHandler<GetOffersQuery, List<OfferDTO>>
         {
             private ApplicationDbContext _context;
             public GetOffersQueuryHandler(ApplicationDbContext context)
@@ -16,7 +16,7 @@ namespace Project.Application.Offers.Queries
                 _context = context;
             }
 
-            public async Task<List<OfferDTO>> Handle(GetOffersQueury request, CancellationToken cancellationToken)
+            public async Task<List<OfferDTO>> Handle(GetOffersQuery request, CancellationToken cancellationToken)
             {
                 var offers = await _context.Offers
                     .AsNoTracking()

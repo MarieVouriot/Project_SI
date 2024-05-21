@@ -24,7 +24,7 @@ namespace Project.Api.Controllers
 
         [HttpPost]
         [Route("deleteUser")]
-        public async Task<ActionResult<Unit>> deleteUser([FromBody] DeleteUserCommand cmd)
+        public async Task<ActionResult<Unit>> DeleteUser([FromBody] DeleteUserCommand cmd)
         {
             return await Mediator.Send(cmd);
         }
