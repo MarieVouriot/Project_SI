@@ -1,31 +1,57 @@
-import "./App.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import {
+    Navbar,
+    NavbarBrand,
+    NavbarContent,
+    NavbarItem,
+    Link,
+    Button,
+} from "@nextui-org/react";
 
-function App() {
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        axios.get("https://localhost:7246/api/User/getUsers").then((res) => {
-            setUsers(res.data);
-        });
-    }, []);
-
+export default function App() {
     return (
-        <div className="App">
-            <div className="containerList">
-                {users.map((user) => {
-                    return (
-                        <div key={user.id} className="container">
-                            <h1 className="title">{user.firstName}</h1>
-                            <p className="subtitle"> {user.lastName}</p>
-                            <button className="button">Click me</button>
-                        </div>
-                    );
-                })}
-            </div>
+        <div>
+            <Navbar shouldHideOnScroll>
+                <NavbarBrand>
+                    <p className="font-bold text-inherit">ACME</p>
+                </NavbarBrand>
+                <NavbarContent
+                    className="hidden sm:flex gap-4"
+                    justify="center"
+                >
+                    <NavbarItem>
+                        <Link color="foreground" href="#">
+                            Features
+                        </Link>
+                    </NavbarItem>
+                    <NavbarItem isActive>
+                        <Link href="#" aria-current="page">
+                            Customers
+                        </Link>
+                    </NavbarItem>
+                    <NavbarItem>
+                        <Link color="foreground" href="#">
+                            Integrations
+                        </Link>
+                    </NavbarItem>
+                </NavbarContent>
+                <NavbarContent justify="end">
+                    <NavbarItem className="hidden lg:flex">
+                        <Link href="#">Login</Link>
+                    </NavbarItem>
+                    <NavbarItem>
+                        <Button
+                            as={Link}
+                            color="primary"
+                            href="#"
+                            variant="flat"
+                        >
+                            Sign Up
+                        </Button>
+                    </NavbarItem>
+                </NavbarContent>
+            </Navbar>
+            <div style={{ height: "2000px" }}>test</div>
         </div>
     );
 }
-
-export default App;
