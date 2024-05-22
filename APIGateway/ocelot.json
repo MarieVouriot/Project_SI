@@ -25,8 +25,56 @@
       "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/api/housings",
+      "DownstreamPathTemplate": "/api/reservation/{id}",
       "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44398
+        }
+      ],
+      "UpstreamPathTemplate": "/reservation/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/reservation",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44398
+        }
+      ],
+      "UpstreamPathTemplate": "/reservation",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/reservation/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44398
+        }
+      ],
+      "UpstreamPathTemplate": "/reservation/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/housings/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44344
+        }
+      ],
+      "UpstreamPathTemplate": "/housings/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/housings",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -34,10 +82,46 @@
         }
       ],
       "UpstreamPathTemplate": "/housings",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/housing",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44344
+        }
+      ],
+      "UpstreamPathTemplate": "/housing",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/housing/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44344
+        }
+      ],
+      "UpstreamPathTemplate": "/housing/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/housing/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44344
+        }
+      ],
+      "UpstreamPathTemplate": "/housing/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
     }
   ],
   "GlobalConfiguration": {
-    
+
   }
 }
