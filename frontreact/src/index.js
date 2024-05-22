@@ -1,17 +1,59 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import Locations from "./pages/Locations/Locations";
+import Reservations from "./pages/Reservation/Reservations";
+import Accueil from "./pages/Accueil/Accueil";
+import { NavBarMain } from "./components/NavBarMain/NavBarMain";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const BrowserRouter = createBrowserRouter([
+    {
+        path: "/",
+        element: (
+            <>
+                <NavBarMain active={"Accueil"} />
+                <Accueil />
+            </>
+        ),
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/accueil",
+        element: (
+            <>
+                <NavBarMain active={"Accueil"} />
+                <Accueil />
+            </>
+        ),
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/locations",
+        element: (
+            <>
+                <NavBarMain active={"Locations"} />
+                <Locations />
+            </>
+        ),
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/reservations",
+        element: (
+            <>
+                <NavBarMain active={"Réservations"} />
+                <Reservations />
+            </>
+        ),
+        errorElement: <ErrorPage />,
+    },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <RouterProvider router={BrowserRouter} />
+    </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
