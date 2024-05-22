@@ -3,33 +3,33 @@ using MediatR;
 
 namespace ReservationService.Reservations.Commands
 {
-    public class RemoveReservationCommand : IRequest<Unit>
+    public class RemoveReservationCommand : IRequest<bool>
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
-        public class RemoveReservationCommandHandler : IRequestHandler<RemoveReservationCommand, Unit>
+        public RemoveReservationCommand(int id)
         {
-            private readonly ApplicationDbContext _context;
+            Id = id;
+        }
+    }
 
-            public RemoveReservationCommandHandler(ApplicationDbContext context)
-            {
-                _context = context;
-            }
+    public class RemoveReservationCommandHandler : IRequestHandler<RemoveReservationCommand, bool>
+    {
+        private readonly ApplicationDbContext _context;
 
-            public async Task<Unit> Handle(RemoveReservationCommand request, CancellationToken cancellationToken)
-            {
-                var reservation = await _context.Reservations.FindAsync(request.Id);
+        public RemoveReservationCommandHandler(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-                if (reservation == null)
-                {
-                    throw new KeyNotFoundException("Reservation not found");
-                }
+        public async Task<bool> Handle(RemoveReservationCommand request, CancellationToken cancellationToken)
+        {
+            var reservation = await _context.Reservations.FindAsync(request.Id);
+            if (reservation == null) return false;
 
-                _context.Reservations.Remove(reservation);
-                await _context.SaveChangesAsync(cancellationToken);
-
-                return Unit.Value;
-            }
+            _context.Reservations.Remove(reservation);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
