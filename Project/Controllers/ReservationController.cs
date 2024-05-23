@@ -50,5 +50,13 @@ namespace ReservationService.Controllers
             var reservations = await _mediator.Send(query);
             return Ok(reservations);
         }
+
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<ReservationDTO>>> GetAllReservations()
+        {
+            var query = new GetAllReservationsQuery();
+            var reservations = await _mediator.Send(query);
+            return Ok(reservations);
+        }
     }
 }

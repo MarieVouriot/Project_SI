@@ -18,33 +18,56 @@ namespace UserService.Users.Commands
             {
                 _context = context;
             }
+
             public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
             {
                 _context.ChangeTracker.AutoDetectChangesEnabled = false;
                 try
                 {
-                    var user = await _context.Users.Where(u => u.Id == request.Id).FirstOrDefaultAsync(cancellationToken);
-                    if(user != null)
+                    var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.Id, cancellationToken);
+                    if (user != null)
                     {
-                        if (!string.IsNullOrWhiteSpace(request.FirstName)) user.FirstName = request.FirstName;
-                        if (!string.IsNullOrWhiteSpace(request.LastName)) user.LastName = request.LastName;
-                        if (!string.IsNullOrWhiteSpace(request.UserName)) user.UserName = request.UserName;
-                        if (!string.IsNullOrWhiteSpace(request.Password)) user.Password = request.Password;
-                        _context.Update(user);
-                        await _context.SaveChangesAsync();
+                        bool hasChanged = false;
+
+                        if (!string.IsNullOrWhiteSpace(request.FirstName) && user.FirstName != request.FirstName)
+                        {
+                            user.FirstName = request.FirstName;
+                            hasChanged = true;
+                        }
+                        if (!string.IsNullOrWhiteSpace(request.LastName) && user.LastName != request.LastName)
+                        {
+                            user.LastName = request.LastName;
+                            hasChanged = true;
+                        }
+                        if (!string.IsNullOrWhiteSpace(request.UserName) && user.UserName != request.UserName)
+                        {
+                            user.UserName = request.UserName;
+                            hasChanged = true;
+                        }
+                        if (!string.IsNullOrWhiteSpace(request.Password) && user.Password != request.Password)
+                        {
+                            user.Password = request.Password;
+                            hasChanged = true;
+                        }
+
+                        if (hasChanged)
+                        {
+                            _context.Update(user);
+                            await _context.SaveChangesAsync(cancellationToken);
+                        }
                     }
                     else
                     {
-                        throw new Exception();
+                        throw new Exception("User not found");
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    throw new Exception("Cannot update user");
+                    throw new Exception("Cannot update user", ex);
                 }
                 finally
                 {
-                    _context.ChangeTracker.AutoDetectChangesEnabled = false;
+                    _context.ChangeTracker.AutoDetectChangesEnabled = true;
                 }
 
                 return Unit.Value;
