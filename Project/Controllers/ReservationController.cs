@@ -1,62 +1,47 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ReservationService.Reservations.Commands;
 using ReservationService.Reservations.Models;
 using ReservationService.Reservations.Queries;
 
 namespace ReservationService.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ReservationController : ControllerBase
+    public class ReservationController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public ReservationController(IMediator mediator)
+        [HttpGet]
+        [Route("getAllReservations")]
+        public async Task<ActionResult<List<ReservationDTO>>> GetAllReservations([FromQuery] GetAllReservationsQuery query)
         {
-            _mediator = mediator;
+            return await Mediator.Send(query);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ReservationDTO>> GetReservationById(int id)
+        [HttpGet]
+        [Route("getReservationById")]
+        public async Task<ActionResult<ReservationDTO>> GetReservationById([FromQuery] GetReservationByIdQuery query)
         {
-            var query = new GetReservationByIdQuery(id);
-            var reservation = await _mediator.Send(query);
-            if (reservation == null) return NotFound();
-            return Ok(reservation);
+            return await Mediator.Send(query);
         }
 
         [HttpPost]
-        public async Task<ActionResult<ReservationDTO>> CreateReservation(ReservationDTO reservationDTO)
+        [Route("createReservation")]
+        public async Task<ActionResult<ReservationDTO>> CreateReservation([FromBody] CreateReservationCommand command)
         {
-            var command = new CreateReservationCommand(reservationDTO);
-            var createdReservation = await  _mediator.Send(command);
-            return CreatedAtAction(nameof(GetReservationById), new { id = createdReservation.Id }, createdReservation);
+            return await Mediator.Send(command);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteReservation(int id)
         {
             var command = new RemoveReservationCommand(id);
-            var result = await _mediator.Send(command);
+            var result = await Mediator.Send(command);
             if (!result) return NotFound();
-            return NoContent();
+            return Ok();
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReservationDTO>>> GetReservations([FromQuery] DateTime? date, [FromQuery] string status)
+        [Route("getReservationsByDate")]
+        public async Task<ActionResult<List<ReservationDTO>>> GetReservationsByDate([FromQuery] GetReservationsByDateQuery query)
         {
-            var query = new GetReservationsQuery(date, status);
-            var reservations = await _mediator.Send(query);
-            return Ok(reservations);
-        }
-
-        [HttpGet("all")]
-        public async Task<ActionResult<IEnumerable<ReservationDTO>>> GetAllReservations()
-        {
-            var query = new GetAllReservationsQuery();
-            var reservations = await _mediator.Send(query);
-            return Ok(reservations);
+            return await Mediator.Send(query);
         }
     }
 }

@@ -5,18 +5,12 @@ using ReservationService.Reservations.Models;
 
 namespace ReservationService.Reservations.Queries
 {
-    public class GetReservationsQuery : IRequest<IEnumerable<ReservationDTO>>
+    public class GetReservationsByDateQuery : IRequest<List<ReservationDTO>>
     {
         public DateTime? Date { get; }
-        public string Status { get; }
+        public byte? Status { get; }
 
-        public GetReservationsQuery(DateTime? date, string status)
-        {
-            Date = date;
-            Status = status;
-        }
-
-        public sealed class GetReservationsQueryHandler : IRequestHandler<GetReservationsQuery, IEnumerable<ReservationDTO>>
+        public sealed class GetReservationsQueryHandler : IRequestHandler<GetReservationsByDateQuery, List<ReservationDTO>>
         {
             private readonly ApplicationDbContext _context;
 
@@ -25,7 +19,7 @@ namespace ReservationService.Reservations.Queries
                 _context = context;
             }
 
-            public async Task<IEnumerable<ReservationDTO>> Handle(GetReservationsQuery request, CancellationToken cancellationToken)
+            public async Task<List<ReservationDTO>> Handle(GetReservationsByDateQuery request, CancellationToken cancellationToken)
             {
                 var query = _context.Reservations.AsNoTracking().AsQueryable();
 
@@ -34,20 +28,20 @@ namespace ReservationService.Reservations.Queries
                     query = query.Where(r => r.StartDate <= request.Date && r.EndDate >= request.Date);
                 }
 
-                if (!string.IsNullOrEmpty(request.Status))
+                if (request.Status.HasValue)
                 {
-                    query = query.Where(r => r.Status.ToString().Equals(request.Status, StringComparison.OrdinalIgnoreCase));
+                    query = query.Where(r => (byte)r.Status == request.Status);
                 }
 
                 var reservations = await query
                     .Select(r => new ReservationDTO
                     {
-                        Id = r.Id,
-                        TenantId = r.TenantId,
-                        OfferId = r.OfferId,
+                        Id        = r.Id,
+                        TenantId  = r.TenantId,
+                        OfferId   = r.OfferId,
                         StartDate = r.StartDate,
-                        EndDate = r.EndDate,
-                        Status = r.Status
+                        EndDate   = r.EndDate,
+                        Status    = r.Status
                     }).ToListAsync(cancellationToken);
 
                 return reservations;

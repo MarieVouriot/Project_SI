@@ -1,5 +1,6 @@
 ﻿using Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace ReservationService.Reservations.Commands
 {
@@ -24,11 +25,13 @@ namespace ReservationService.Reservations.Commands
 
         public async Task<bool> Handle(RemoveReservationCommand request, CancellationToken cancellationToken)
         {
-            var reservation = await _context.Reservations.FindAsync(request.Id);
+            var reservation = await _context.Reservations.SingleOrDefaultAsync(r => r.Id == request.Id, cancellationToken);
+            
             if (reservation == null) return false;
 
             _context.Reservations.Remove(reservation);
             await _context.SaveChangesAsync();
+
             return true;
         }
     }

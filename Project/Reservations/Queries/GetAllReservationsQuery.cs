@@ -1,41 +1,36 @@
 ﻿using Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using ReservationService.Reservations.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ReservationService.Reservations.Queries
 {
-    public class GetAllReservationsQuery : IRequest<IEnumerable<ReservationDTO>>
+    public class GetAllReservationsQuery : IRequest<List<ReservationDTO>>
     {
-    }
-
-    public class GetAllReservationsQueryHandler : IRequestHandler<GetAllReservationsQuery, IEnumerable<ReservationDTO>>
-    {
-        private readonly ApplicationDbContext _context;
-
-        public GetAllReservationsQueryHandler(ApplicationDbContext context)
+        public class GetAllReservationsQueryHandler : IRequestHandler<GetAllReservationsQuery, List<ReservationDTO>>
         {
-            _context = context;
-        }
+            private readonly ApplicationDbContext _context;
 
-        public async Task<IEnumerable<ReservationDTO>> Handle(GetAllReservationsQuery request, CancellationToken cancellationToken)
-        {
-            var reservations = _context.Reservations
-                .Select(r => new ReservationDTO
-                {
-                    Id = r.Id,
-                    TenantId = r.TenantId,
-                    OfferId = r.OfferId,
-                    StartDate = r.StartDate,
-                    EndDate = r.EndDate,
-                    Status = r.Status
-                })
-                .ToList();
+            public GetAllReservationsQueryHandler(ApplicationDbContext context)
+            {
+                _context = context;
+            }
 
-            return reservations;
+            public async Task<List<ReservationDTO>> Handle(GetAllReservationsQuery request, CancellationToken cancellationToken)
+            {
+                var reservations = await _context.Reservations
+                    .Select(r => new ReservationDTO
+                    {
+                        Id = r.Id,
+                        TenantId = r.TenantId,
+                        OfferId = r.OfferId,
+                        StartDate = r.StartDate,
+                        EndDate = r.EndDate,
+                        Status = r.Status
+                    }).ToListAsync(cancellationToken);
+
+                return reservations;
+            }
         }
     }
 }

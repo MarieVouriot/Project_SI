@@ -1,5 +1,6 @@
 ﻿using Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using ReservationService.Reservations.Models;
 
 namespace ReservationService.Reservations.Queries
@@ -8,35 +9,35 @@ namespace ReservationService.Reservations.Queries
     {
         public int Id { get; }
 
-        public GetReservationByIdQuery(int id)
+        public class GetReservationByIdQueryHandler : IRequestHandler<GetReservationByIdQuery, ReservationDTO>
         {
-            Id = id;
-        }
-    }
+            private readonly ApplicationDbContext _context;
 
-    public class GetReservationByIdQueryHandler : IRequestHandler<GetReservationByIdQuery, ReservationDTO>
-    {
-        private readonly ApplicationDbContext _context;
-
-        public GetReservationByIdQueryHandler(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<ReservationDTO> Handle(GetReservationByIdQuery request, CancellationToken cancellationToken)
-        {
-            var reservation = await _context.Reservations.FindAsync(request.Id);
-            if (reservation == null) return null;
-
-            return new ReservationDTO
+            public GetReservationByIdQueryHandler(ApplicationDbContext context)
             {
-                Id = reservation.Id,
-                TenantId = reservation.TenantId,
-                OfferId = reservation.OfferId,
-                StartDate = reservation.StartDate,
-                EndDate = reservation.EndDate,
-                Status = reservation.Status
-            };
+                _context = context;
+            }
+
+            public async Task<ReservationDTO> Handle(GetReservationByIdQuery request, CancellationToken cancellationToken)
+            {
+                var reservation = await _context.Reservations
+                    .AsNoTracking()
+                    .Select(r => new ReservationDTO
+                    {
+                        Id = r.Id,
+                        TenantId = r.TenantId,
+                        OfferId = r.OfferId,
+                        StartDate = r.StartDate,
+                        EndDate = r.EndDate,
+                        Status = r.Status
+                    }).SingleOrDefaultAsync(r => r.Id == request.Id, cancellationToken);
+
+                if (reservation == null)
+                {
+                    throw new Exception("No reservation found");
+                }
+                return reservation;
+            }
         }
     }
 }

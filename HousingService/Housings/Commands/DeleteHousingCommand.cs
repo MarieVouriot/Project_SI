@@ -1,5 +1,6 @@
 ﻿using Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace HousingService.Housings.Commands
 {
@@ -18,7 +19,7 @@ namespace HousingService.Housings.Commands
 
             public async Task<Unit> Handle(DeleteHousingCommand request, CancellationToken cancellationToken)
             {
-                var housing = await _context.Housings.FindAsync(request.Id);
+                var housing = await _context.Housings.FirstOrDefaultAsync(h => h.Id == request.Id, cancellationToken);
 
                 if (housing == null)
                 {

@@ -21,16 +21,15 @@ namespace HousingService.Housings.Queries
                     .AsNoTracking()
                     .Select(h => new HousingDTO
                     {
-                        Id = h.Id,
-                        Address = h.Address,
+                        Id          = h.Id,
+                        Address     = h.Address,
                         Description = h.Description,
-                        OwnerId = h.OwnerId,
-                        Type = h.Type
+                        OwnerId     = h.OwnerId,
+                        Type        = h.Type
                     }).ToListAsync(cancellationToken);
 
-                return housings ?? new List<HousingDTO>();
+                return housings ?? [];
             }
-
         }
     }
 }

@@ -15,6 +15,7 @@ namespace UserService.Users.Commands
             {
                 _context = context;
             }
+
             public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
             {
                 _context.ChangeTracker.AutoDetectChangesEnabled = false;
@@ -26,7 +27,6 @@ namespace UserService.Users.Commands
                         _context.Users.Remove(userToDelete);
                         await _context.SaveChangesAsync();
                     }
-
                 }
                 catch
                 {

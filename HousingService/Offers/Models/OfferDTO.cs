@@ -9,6 +9,6 @@ namespace HousingService.Offers.Models
         public OfferStatus Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public double PricePerDay { get; set; }
+        public decimal PricePerDay { get; set; }
     }
 }

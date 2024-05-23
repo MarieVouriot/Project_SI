@@ -20,25 +20,19 @@ namespace UserService.Users.Queries
 
         public async Task<List<HousingDTO>> Handle(GetUserHousingsQuery request, CancellationToken cancellationToken)
         {
-            var user = await _context.Users
-                .Include(u => u.Housings)
-                .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+            var userHousings = await _context.Housings
+                .AsNoTracking()
+                .Where(h => h.OwnerId == request.UserId)
+                .Select(h => new HousingDTO
+                {
+                    Id          = h.Id,
+                    Address     = h.Address,
+                    Description = h.Description,
+                    OwnerId     = h.OwnerId,
+                    Type        = h.Type
+                }).ToListAsync();
 
-            if (user == null)
-            {
-                return null;
-            }
-
-            var housings = user.Housings.Select(h => new HousingDTO
-            {
-                Id = h.Id,
-                Address = h.Address,
-                Description = h.Description,
-                OwnerId = h.OwnerId,
-                Type = h.Type
-            }).ToList();
-
-            return housings;
+            return userHousings ?? new List<HousingDTO>();
         }
     }
 }

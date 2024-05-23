@@ -2,17 +2,17 @@
 using Infrastructure.Entities;
 using Infrastructure.Enums;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace HousingService.Offers.Commands
 {
     public class AddOfferCommand : IRequest<Unit>
     {
-        public int Id { get; set; }
         public int HouseId { get; set; }
         public OfferStatus Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public double PricePerDay { get; set; }
+        public decimal PricePerDay { get; set; }
         
         public sealed class AddOfferCommandHandler : IRequestHandler<AddOfferCommand, Unit>
         {
@@ -27,14 +27,20 @@ namespace HousingService.Offers.Commands
                 _context.ChangeTracker.AutoDetectChangesEnabled = false;
                 try
                 {
+                    var housing = await _context.Housings.AsNoTracking().FirstOrDefaultAsync(h => h.Id == request.HouseId, cancellationToken);
+
+                    if (housing == null)
+                    {
+                        throw new Exception("No housing found.");
+                    }
+
                     var offer = new Offer
                     {
-                        Id = request.Id,
-                        HouseId = request.HouseId,
-                        Status = request.Status,
-                        StartDate = request.StartDate,
-                        EndDate = request.EndDate,
-                        PricePerDay = request.PricePerDay
+                        HousingId     = housing.Id,
+                        Status      = request.Status,
+                        StartDate   = request.StartDate,
+                        EndDate     = request.EndDate,
+                        PricePerDay = request.PricePerDay,
                     };
 
                     await _context.Offers.AddAsync(offer, cancellationToken);

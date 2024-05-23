@@ -45,12 +45,12 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.G
 
 WebApplication app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
 
-    InitData.Initialize(services);
-}
+//    InitData.Initialize(services);
+//}
 
 app.UseRouting();
 app.UseAuthentication();

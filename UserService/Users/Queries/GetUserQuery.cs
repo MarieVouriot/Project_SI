@@ -29,13 +29,15 @@ namespace UserService.Users.Queries
                         UserName = u.UserName,
                         Password = u.Password,
                         IsOwner = u.IsOwner,
-                    })
-                    .FirstOrDefaultAsync(cancellationToken);
+                    }).FirstOrDefaultAsync(cancellationToken);
 
-                return user ?? new UserDto();
+                if (user == null)
+                {
+                    throw new Exception("No user found");
+                }
+
+                return user;
             }
-
         }
-
     }
 }

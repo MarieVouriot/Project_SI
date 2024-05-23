@@ -29,10 +29,10 @@ namespace HousingService.Housings.Commands
                 {
                     var housing = new Housing
                     {
-                        Address = request.Address,
+                        Address     = request.Address,
                         Description = request.Description,
-                        OwnerId = request.OwnerId,
-                        Type = request.Type
+                        OwnerId     = request.OwnerId,
+                        Type        = request.Type
                     };
 
                     await _context.Housings.AddAsync(housing, cancellationToken);

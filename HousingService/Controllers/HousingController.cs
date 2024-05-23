@@ -9,28 +9,23 @@ namespace HousingService.Api.Controllers
 {
     public class HousingController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public HousingController(IMediator mediator)
+        [HttpGet]
+        [Route("getHousingById")]
+        public async Task<ActionResult<HousingDTO>> GetHousingById([FromQuery] GetHousingByIdQuery query)
         {
-            _mediator = mediator;
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetHousingById(int id)
-        {
-            var result = await Mediator.Send(new GetHousingsByIdQuery(id));
-            return Ok(result);
+            return await Mediator.Send(query);
         }
 
         [HttpGet]
+        [Route("getHousings")]
         public async Task<ActionResult<List<HousingDTO>>> GetHousings([FromQuery] GetHousingsQuery query)
         {
             return await Mediator.Send(query);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddHousing([FromBody] AddHousingCommand command)
+        [Route("addHousing")]
+        public async Task<ActionResult> AddHousing([FromBody] AddHousingCommand command)
         {
             var result = await Mediator.Send(command);
             return Ok(result);
@@ -42,18 +37,17 @@ namespace HousingService.Api.Controllers
             return await Mediator.Send(cmd);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateHousing(int id, [FromBody] UpdateHousingsCommand command)
+        [HttpPut]
+        [Route("updateHousing")]
+        public async Task<ActionResult<Unit>> UpdateHousing([FromBody] UpdateHousingCommand command)
         {
-            command.HousingId = id;
-            var result = await Mediator.Send(command);
-            return Ok(result);
+            return await Mediator.Send(command);
         }
 
         [HttpGet("{id}/offers")]
-        public async Task<IActionResult> GetOffersByHousingId(int id)
+        public async Task<ActionResult> GetOffersByHousingId(int id)
         {
-            var result = await Mediator.Send(new GetOffersByHousingIdQuery(id));
+            var result = await Mediator.Send(new GetOffersOfHousingQuery(id));
             return Ok(result);
         }
     }

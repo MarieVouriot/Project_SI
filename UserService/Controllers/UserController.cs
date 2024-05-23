@@ -30,8 +30,8 @@ namespace UserService.Api.Controllers
             return await Mediator.Send(cmd);
         }
 
-
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("deleteUser")]
         public async Task<ActionResult<Unit>> DeleteUser([FromBody] DeleteUserCommand cmd)
         {
             return await Mediator.Send(cmd);
