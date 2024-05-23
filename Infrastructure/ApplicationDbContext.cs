@@ -22,7 +22,15 @@ namespace Infrastructure
                 .HasForeignKey(r => r.TenantId)    // Clé étrangère dans Reservation
                 .OnDelete(DeleteBehavior.Restrict); // Restriction de suppression (pas de suppression en cascade)
 
+            // Configure la relation entre Offer (Child) et Housing (Parent)
+            builder.Entity<Offer>()
+                .HasOne(o => o.Housing)             // Chaque offre a un logement associé
+                .WithMany(h => h.Offers)            // Chaque logement peut avoir plusieurs offres
+                .HasForeignKey(o => o.HouseId)     // Clé étrangère dans Offer
+                .OnDelete(DeleteBehavior.Restrict); // Restriction de suppression (pas de suppression en cascade)
         }
+
+
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
