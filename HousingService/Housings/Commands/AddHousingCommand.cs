@@ -2,6 +2,7 @@
 using Infrastructure.Entities;
 using Infrastructure.Enums;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace HousingService.Housings.Commands
@@ -27,6 +28,13 @@ namespace HousingService.Housings.Commands
                 _context.ChangeTracker.AutoDetectChangesEnabled = false;
                 try
                 {
+                    var owner = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u  => u.Id == request.OwnerId, cancellationToken);
+                    
+                    if (owner == null || !owner.IsOwner)
+                    {
+                        throw new Exception("User not found");
+                    }
+
                     var housing = new Housing
                     {
                         Address     = request.Address,
