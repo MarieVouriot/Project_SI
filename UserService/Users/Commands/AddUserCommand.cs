@@ -1,6 +1,7 @@
 ﻿using Infrastructure;
 using Infrastructure.Entities;
 using MediatR;
+using UserService.Repositories;
 
 namespace UserService.Users.Commands
 {
@@ -15,9 +16,11 @@ namespace UserService.Users.Commands
         public sealed class AddUserCommandHandler : IRequestHandler<AddUserCommand, Unit>
         {
             private ApplicationDbContext _context;
+            private IUserRepository _userRepository;
             public AddUserCommandHandler(ApplicationDbContext context)
             {
                 _context = context;
+                _userRepository = new UserRepository(context);
             }
 
             public async Task<Unit> Handle(AddUserCommand request, CancellationToken cancellationToken)
@@ -25,17 +28,7 @@ namespace UserService.Users.Commands
                 _context.ChangeTracker.AutoDetectChangesEnabled = false;
                 try
                 {
-                    var user = new User
-                    {
-                        FirstName = request.FirstName,
-                        LastName = request.LastName,
-                        UserName = request.UserName,
-                        Password = request.Password,
-                        IsOwner = request.IsOwner,
-                    };
-
-                    await _context.Users.AddAsync(user, cancellationToken);
-                    await _context.SaveChangesAsync();
+                    await _userRepository.AddUserAsync(request.LastName, request.FirstName, request.UserName, request.Password, request.IsOwner, cancellationToken);
                 }
                 catch
                 {
