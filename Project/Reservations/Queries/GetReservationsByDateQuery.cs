@@ -7,8 +7,8 @@ namespace ReservationService.Reservations.Queries
 {
     public class GetReservationsByDateQuery : IRequest<List<ReservationDTO>>
     {
-        public DateTime? Date { get; }
-        public byte? Status { get; }
+        public DateTime? Date { get; set; }
+        public byte? Status { get; set; }
 
         public sealed class GetReservationsQueryHandler : IRequestHandler<GetReservationsByDateQuery, List<ReservationDTO>>
         {

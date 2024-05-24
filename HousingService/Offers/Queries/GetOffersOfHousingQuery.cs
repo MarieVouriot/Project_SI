@@ -13,32 +13,31 @@ namespace HousingService.Offers.Queries
         {
             HousingId = housingId;
         }
+    }
+    public sealed class GetOffersByHousingIdQueryHandler : IRequestHandler<GetOffersOfHousingQuery, List<OfferDTO>>
+    {
+        private readonly ApplicationDbContext _context;
 
-        public sealed class GetOffersByHousingIdQueryHandler : IRequestHandler<GetOffersOfHousingQuery, List<OfferDTO>>
+        public GetOffersByHousingIdQueryHandler(ApplicationDbContext context)
         {
-            private readonly ApplicationDbContext _context;
+            _context = context;
+        }
 
-            public GetOffersByHousingIdQueryHandler(ApplicationDbContext context)
-            {
-                _context = context;
-            }
+        public async Task<List<OfferDTO>> Handle(GetOffersOfHousingQuery request, CancellationToken cancellationToken)
+        {
+            var offers = await _context.Offers
+                .AsNoTracking()
+                .Where(o => o.HousingId == request.HousingId)
+                .Select(o => new OfferDTO
+                {
+                    Id = o.Id,
+                    HousingId = o.HousingId,
+                    StartDate = o.StartDate,
+                    EndDate = o.EndDate
+                })
+                .ToListAsync(cancellationToken);
 
-            public async Task<List<OfferDTO>> Handle(GetOffersOfHousingQuery request, CancellationToken cancellationToken)
-            {
-                var offers = await _context.Offers
-                    .AsNoTracking()
-                    .Where(o => o.HousingId == request.HousingId)
-                    .Select(o => new OfferDTO
-                    {
-                        Id = o.Id,
-                        HouseId = o.HousingId,
-                        StartDate = o.StartDate,
-                        EndDate = o.EndDate
-                    })
-                    .ToListAsync(cancellationToken);
-
-                return offers ?? new List<OfferDTO>();  
-            }
+            return offers ?? new List<OfferDTO>();
         }
     }
 }

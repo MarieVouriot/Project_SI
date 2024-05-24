@@ -1,5 +1,6 @@
 ﻿using Infrastructure;
 using Infrastructure.Entities;
+using Infrastructure.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ReservationService.Reservations.Models;
@@ -8,7 +9,11 @@ namespace ReservationService.Reservations.Commands
 {
     public class CreateReservationCommand : IRequest<ReservationDTO>
     {
-        public ReservationDTO Reservation { get; }
+        public int TenantId { get; set; }
+        public int OfferId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public ReservationStatusEnum Status { get; set; }
 
         public class CreateReservationCommandHandler : IRequestHandler<CreateReservationCommand, ReservationDTO>
         {
@@ -23,7 +28,7 @@ namespace ReservationService.Reservations.Commands
             {
                 var offer = await _context.Offers
                     .AsNoTracking()
-                    .SingleOrDefaultAsync(o => o.Id == request.Reservation.OfferId, cancellationToken);
+                    .SingleOrDefaultAsync(o => o.Id == request.OfferId, cancellationToken);
 
                 if (offer == null)
                 {
@@ -32,11 +37,11 @@ namespace ReservationService.Reservations.Commands
 
                 var reservation = new Reservation
                 {
-                    TenantId  = request.Reservation.TenantId,
-                    OfferId   = request.Reservation.OfferId,
-                    StartDate = request.Reservation.StartDate,
-                    EndDate   = request.Reservation.EndDate,
-                    Status    = request.Reservation.Status
+                    TenantId  = request.TenantId,
+                    OfferId   = request.OfferId,
+                    StartDate = request.StartDate,
+                    EndDate   = request.EndDate,
+                    Status    = request.Status
                 };
 
                 _context.Reservations.Add(reservation);

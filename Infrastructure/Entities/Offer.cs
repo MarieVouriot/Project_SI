@@ -9,7 +9,7 @@ namespace Infrastructure.Entities
         public OfferStatus Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public decimal PricePerDay { get; set; }
+        public double PricePerDay { get; set; }
 
         // navigation properties
         public Housing Housing { get; set; }

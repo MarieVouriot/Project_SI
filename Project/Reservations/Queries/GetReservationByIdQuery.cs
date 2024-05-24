@@ -7,7 +7,7 @@ namespace ReservationService.Reservations.Queries
 {
     public class GetReservationByIdQuery : IRequest<ReservationDTO>
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
         public class GetReservationByIdQueryHandler : IRequestHandler<GetReservationByIdQuery, ReservationDTO>
         {

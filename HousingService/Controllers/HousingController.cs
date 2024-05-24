@@ -31,7 +31,8 @@ namespace HousingService.Api.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("deleteHousing")]
         public async Task<ActionResult<Unit>> DeleteHousing([FromBody] DeleteHousingCommand cmd)
         {
             return await Mediator.Send(cmd);

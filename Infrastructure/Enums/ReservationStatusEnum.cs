@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Enums
 {
-    public enum ReservationStatusEnum : byte
+    public enum ReservationStatusEnum
     {
         Draft      = 1,
         InProgress = 2,

@@ -7,7 +7,7 @@ namespace HousingService.Housings.Queries
 {
     public class GetHousingByIdQuery : IRequest<HousingDTO>
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
         public sealed class GetHousingByIdQueryHandler : IRequestHandler<GetHousingByIdQuery, HousingDTO>
         {

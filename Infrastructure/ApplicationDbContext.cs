@@ -49,7 +49,7 @@ namespace Infrastructure
                 entity.Property(o => o.Status).IsRequired();
                 entity.Property(o => o.StartDate).IsRequired();
                 entity.Property(o => o.EndDate).IsRequired();
-                entity.Property(o => o.PricePerDay).IsRequired().HasColumnType("decimal(18,2)");
+                entity.Property(o => o.PricePerDay).IsRequired();
 
                 // Foreign Key - HousingId
                 entity.HasOne(o => o.Housing)

@@ -1,4 +1,5 @@
 ﻿using HousingService.Api.Controllers;
+using HousingService.Housings.Commands;
 using HousingService.Offers.Commands;
 using HousingService.Offers.Models;
 using HousingService.Offers.Queries;
@@ -16,18 +17,18 @@ namespace HousingService.Controllers
             return await Mediator.Send(query);
         }
 
-        [HttpGet]
-        [Route("getOffersOfHousing")]
-        public async Task<ActionResult<List<OfferDTO>>> GetOffersOfHousing([FromQuery] GetOffersOfHousingQuery query)
-        {
-            return await Mediator.Send(query);
-        }
-
         [HttpPost]
         [Route("addOffer")]
         public async Task<ActionResult<Unit>> AddOffer([FromBody] AddOfferCommand cmd)
         {
             return await Mediator.Send(cmd);
+        }
+
+        [HttpPut]
+        [Route("updateOffer")]
+        public async Task<ActionResult<Unit>> UpdateOffer([FromBody] UpdateOfferCommand command)
+        {
+            return await Mediator.Send(command);
         }
 
         [HttpDelete]

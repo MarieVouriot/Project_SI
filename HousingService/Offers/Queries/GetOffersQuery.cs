@@ -23,7 +23,7 @@ namespace HousingService.Offers.Queries
                     .Select(o => new OfferDTO
                     {
                         Id          = o.Id,
-                        HouseId     = o.HousingId,
+                        HousingId     = o.HousingId,
                         Status      = o.Status,
                         StartDate   = o.StartDate,
                         EndDate     = o.EndDate,
@@ -32,7 +32,6 @@ namespace HousingService.Offers.Queries
 
                 return offers ?? new List<OfferDTO>();
             }
-            
         }
     }
 }
