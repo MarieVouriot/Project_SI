@@ -15,19 +15,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Configure CORS
-builder.Services
-    .AddCors(options =>
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
     {
-        options.AddPolicy("CorsPolicy", policy =>
-        {
-            policy
-                .WithOrigins(builder.Configuration.GetSection("CORS:Origins").Get<string[]>() ?? [])
-                .AllowAnyMethod()
-                .AllowCredentials()
-                .AllowAnyHeader()
-                .SetIsOriginAllowedToAllowWildcardSubdomains();
-        });
+        builder.WithOrigins("http://localhost:3000").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
+});
 
 // Configure health checks
 builder.Services
@@ -69,7 +63,7 @@ app.MapHealthChecks("/liveness", new HealthCheckOptions
     Predicate = r => r.Name.Contains("self")
 });
 
-app.UseCors("CorsPolicy");
+app.UseCors();
 
 await app.UseOcelot();
 await app.RunAsync();
