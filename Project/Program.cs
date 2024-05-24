@@ -9,13 +9,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var provider = builder.Services.BuildServiceProvider();
-var configuration = provider.GetRequiredService<IConfiguration>();
-
+//configure CORS
 builder.Services.AddCors(options =>
 {
-    var frontendURL = configuration.GetValue<string>("frontend_url");
-
     options.AddDefaultPolicy(builder =>
     {
         builder.WithOrigins("http://localhost:3000").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();

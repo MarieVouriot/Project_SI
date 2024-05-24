@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
-import Locations from "./pages/Locations/Locations";
+import Logements from "./pages/Logements/Logements";
 import Reservations from "./pages/Reservation/Reservations";
 import Accueil from "./pages/Accueil/Accueil";
 import { NavBarMain } from "./components/NavBarMain/NavBarMain";
@@ -23,18 +23,18 @@ const BrowserRouter = createBrowserRouter([
         path: "/accueil",
         element: (
             <>
-                <NavBarMain active={"Accueil"} />
+                <NavBarMain active={1} />
                 <Accueil />
             </>
         ),
         errorElement: <ErrorPage />,
     },
     {
-        path: "/locations",
+        path: "/logements",
         element: (
             <>
-                <NavBarMain active={"Locations"} />
-                <Locations />
+                <NavBarMain active={2} />
+                <Logements />
             </>
         ),
         errorElement: <ErrorPage />,
@@ -43,7 +43,7 @@ const BrowserRouter = createBrowserRouter([
         path: "/reservations",
         element: (
             <>
-                <NavBarMain active={"Réservations"} />
+                <NavBarMain active={3} />
                 <Reservations />
             </>
         ),

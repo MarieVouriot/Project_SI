@@ -19,7 +19,7 @@ export const NavBarMain = ({ active }) => {
         setActiveItem(active);
     }, []);
 
-    const menuItems = ["Accueil", "Locations", "Réservations", "Log Out"];
+    const menuItems = ["Accueil", "Logements", "Réservations", "Log Out"];
 
     return (
         <>
@@ -43,27 +43,27 @@ export const NavBarMain = ({ active }) => {
                     className="hidden sm:flex gap-4"
                     justify="center"
                 >
-                    <NavbarItem isActive={activeItem === "Accueil"}>
+                    <NavbarItem isActive={activeItem === 1}>
                         <Link
-                            onClick={() => setActiveItem("Accueil")}
+                            onClick={() => setActiveItem(1)}
                             color="foreground"
                             href="accueil"
                         >
                             Accueil
                         </Link>
                     </NavbarItem>
-                    <NavbarItem isActive={activeItem === "Locations"}>
+                    <NavbarItem isActive={activeItem === 2}>
                         <Link
-                            onClick={() => setActiveItem("Locations")}
+                            onClick={() => setActiveItem(2)}
                             color="foreground"
-                            href="locations"
+                            href="logements"
                         >
-                            Locations
+                            Logements
                         </Link>
                     </NavbarItem>
-                    <NavbarItem isActive={activeItem === "Réservations"}>
+                    <NavbarItem isActive={activeItem === 3}>
                         <Link
-                            onClick={() => setActiveItem("Réservations")}
+                            onClick={() => setActiveItem(3)}
                             color="foreground"
                             href="reservations"
                         >
